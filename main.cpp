@@ -118,7 +118,7 @@ vector<State> ParseLine(string &line) {
   return board_row;
 }
 
-vector<vector<State>> ReadBoard(string file_path) {
+vector<vector<State>> ReadBoard(string &file_path) {
   ifstream file_stream(file_path);
   vector<vector<State>> board;
   if (file_stream) {
@@ -140,7 +140,7 @@ string CellString(State &cell) {
     case State::Start : return "🚦 ";
     case State::Finish : return "🏁 ";
     case State::Obstacle : return "⛰️ ";
-    case State::Path : return "🚗   ";
+    case State::Path : return "🚗 ";
     default : return " 0 ";
   }
 }

@@ -19,6 +19,7 @@ enum class State {Empty, Obstacle, Path, Closed, Start, Finish};
 const vector<vector<int>> moves = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 
 bool CompareNodes(const vector<int> &open_node_1, const vector<int> &open_node_2) {
+
   int steps_from_start_node_1 = open_node_1[2];
 	int steps_from_goal_node_1 = open_node_1[3];
 	int steps_from_start_node_2 = open_node_2[2]; 
@@ -27,24 +28,32 @@ bool CompareNodes(const vector<int> &open_node_1, const vector<int> &open_node_2
   return (steps_from_start_node_1 + steps_from_goal_node_1) > (steps_from_start_node_2 + steps_from_goal_node_2);
 }
 
+
 void SortOpenNodes(vector<vector<int>> *open_nodes) {
+
   sort(open_nodes->begin(), open_nodes->end(), CompareNodes);
 
   return;
 }
 
+
 void AddToOpenNodes(int x, int y, int steps_from_start, int steps_to_goal, vector<vector<int>> &open_nodes, vector<vector<State>> &board) {
+
   open_nodes.push_back({x, y, steps_from_start, steps_to_goal});
   board[x][y] = State::Closed;
 
   return;
 }
 
+
 int CalculateDistanceToGoal(const int &startX, const int &startY, const int &goalX, const int &goalY) {
+
   return abs(goalX - startX) + abs(goalY - startY);
 }
 
+
 bool CheckValidCell(int x, int y, vector<vector<State>> &board) {
+
   bool on_board_x = (x >= 0 && x < board.size());
   bool on_board_y = (y >= 0 && y < board[0].size());
 
@@ -54,7 +63,9 @@ bool CheckValidCell(int x, int y, vector<vector<State>> &board) {
   return false;
 }
 
+
 void ExpandNeighbourNodes(const vector<int> &current_node, int goal[2], vector<vector<int>> &open_nodes, vector<vector<State>> &board) {
+
   int steps_from_start = current_node[3];
 
   for(int i = 0; i < moves.size(); i++) {
@@ -69,6 +80,7 @@ void ExpandNeighbourNodes(const vector<int> &current_node, int goal[2], vector<v
     }
   }
 }
+
 
 vector<vector<State>> Search(vector<vector<State>> &board, int start[2], int goal[2]) {
 
@@ -96,6 +108,7 @@ vector<vector<State>> Search(vector<vector<State>> &board, int start[2], int goa
 
       return board;
     }
+
     ExpandNeighbourNodes(current_node, goal, open_nodes, board);
   }
 
@@ -103,7 +116,9 @@ vector<vector<State>> Search(vector<vector<State>> &board, int start[2], int goa
   return vector<vector<State>>{};
 }
 
+
 vector<State> ParseLine(string &line) {
+
   istringstream line_stream(line);
 
   int value;
@@ -118,9 +133,13 @@ vector<State> ParseLine(string &line) {
   return board_row;
 }
 
+
 vector<vector<State>> ReadBoard(string &file_path) {
+
   ifstream file_stream(file_path);
+
   vector<vector<State>> board;
+
   if (file_stream) {
     string line;
     while (getline(file_stream, line)) {
@@ -135,7 +154,9 @@ vector<vector<State>> ReadBoard(string &file_path) {
   return board;
 }
 
+
 string CellString(State &cell) {
+
   switch (cell) {
     case State::Start : return "🚦 ";
     case State::Finish : return "🏁 ";
@@ -145,7 +166,9 @@ string CellString(State &cell) {
   }
 }
 
+
 void PrintBoard(vector<vector<State>> board) {
+
   for(vector<State> board_row : board) {
     for(State cell : board_row) {
       cout << CellString(cell) << " ";
@@ -156,7 +179,9 @@ void PrintBoard(vector<vector<State>> board) {
   return;
 }
 
+
 int main() {
+
   string board_location = "1.board";
   int start[2] = {0, 0};
   int goal[2] = {4, 5};

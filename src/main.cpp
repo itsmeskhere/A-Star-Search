@@ -10,7 +10,7 @@ using std::vector;
 
 int main() {
 
-  string board_location = "/home/itsmesk/Code/C++/C++ Nanodegree/A-Star-Search/src/1.board";
+  string board_location = "/home/itsmesk/Code/C++/C++ Nanodegree/A-Star-Search/1.board";
 
   vector<vector<State>> board = ReadBoard(board_location);
   vector<int> start_and_finish = FindStartAndFinish(board);

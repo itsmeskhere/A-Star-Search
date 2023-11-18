@@ -21,9 +21,9 @@ const vector<vector<int>> moves = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 bool CompareNodes(const vector<int> &open_node_1, const vector<int> &open_node_2) {
 
   int steps_from_start_node_1 = open_node_1[2];
-	int steps_from_goal_node_1 = open_node_1[3];
-	int steps_from_start_node_2 = open_node_2[2]; 
-	int steps_from_goal_node_2 = open_node_2[3];
+  int steps_from_goal_node_1 = open_node_1[3];
+  int steps_from_start_node_2 = open_node_2[2]; 
+  int steps_from_goal_node_2 = open_node_2[3];
 
   return (steps_from_start_node_1 + steps_from_goal_node_1) > (steps_from_start_node_2 + steps_from_goal_node_2);
 }
